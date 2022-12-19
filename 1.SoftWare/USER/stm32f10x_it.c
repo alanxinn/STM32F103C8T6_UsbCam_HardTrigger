@@ -25,6 +25,7 @@
 #include "stm32f10x_it.h"
 #include "GW_Exti.h"
 #include "GW_Led.h"
+#include "GW_Tim.h"
 /** @addtogroup STM32F10x_StdPeriph_Template
   * @{
   */
@@ -137,6 +138,7 @@ void SysTick_Handler(void)
 {
 }
 
+static int a = 0;
 void KEY1_IRQHandler(void)
 {
   //确保是否产生了EXTI Line中断
@@ -144,7 +146,19 @@ void KEY1_IRQHandler(void)
 	{
 		// LED1 取反		
 		LED1_TOGGLE;
-		//GPIO_ResetBits(LED1_GPIO_PORT,LED1_GPIO_PIN);
+				
+		//PA6取反
+		if(a%2 == 0)
+		{
+			TIM_Cmd(GENERAL_TIM, ENABLE);
+		}
+		if(a%2 == 1)
+		{
+			TIM_Cmd(GENERAL_TIM, DISABLE);
+		}
+		
+		a++;
+		
     //清除中断标志位
 		EXTI_ClearITPendingBit(KEY1_INT_EXTI_LINE);     
 	}  
