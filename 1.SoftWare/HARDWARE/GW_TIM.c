@@ -140,7 +140,7 @@ static void GENERAL_TIM_Mode_Config(void)
 	TIM_OC4PreloadConfig(GENERAL_TIM, TIM_OCPreload_Enable);
 	
 	// 使能计数器
-	TIM_Cmd(GENERAL_TIM, DISABLE);
+	//TIM_Cmd(GENERAL_TIM, DISABLE);
 }
 
 /**
